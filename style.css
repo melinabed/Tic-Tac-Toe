@@ -7,7 +7,7 @@
 }
 
 .container {
-    margin-top: 35px;
+    margin-top: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,10 +19,44 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    background-color: blue;
     height: 500px;
-    max-width: 800px;
+    max-width: 800px; 
 }
+.box > div {
+    border: 1px solid black;
+}
+.box > div#box1 {
+    border-top-color: transparent;
+    border-left-color: transparent;
+}
+.box > div#box2 {
+    border-top-color: transparent;
+}
+.box > div#box3 {
+    border-top-color: transparent;
+    border-right-color: transparent;
+}
+.box > div#box4 {
+    border-left-color: transparent;
+}
+.box > div#box6 {
+    border-right-color: transparent;
+}
+.box > div#box7 {
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+}
+.box > div#box8 {
+    border-bottom-color: transparent;
+}
+.box > div#box9 {
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+}
+
+
+
+
 .footer {
     display: flex;
     justify-content: center;
