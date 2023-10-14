@@ -6,24 +6,28 @@ startGame.forEach((startGame) => {
 });
 
 const Gameboard = (() => {
-    let gameboard = ["", "", "", "", "", "", "", "", ""];
+    let gameboard = ["", "", "", "", "", "", "", "", ""]
 
-    const setMarker = (index, sign) => {
-        if (index > board.length)
-        return;
-        board[index] = sign;
-    };
-    const getMarker = (index) => {
-        if (index > board.length)
-        return;
-        return board[index];
-    }
-    const reset = () => {
-        for (let i = 0; i < board.length; i++) {
-            board[i] = "";
+    const render = () => {
+        const setValue = (index, marker) => {
+            if (index > gameboard.length) return;
+            gameboard[index] = marker;
         }
+        const getValue = (index) => {
+            if (index > gameboard.length) return;
+            return gameboard[index];
+        }
+        const reset = () => {
+            for (let i = 0; i < gameboard.length; i++) {
+                gameboard[i] = "";
+            }
+        }
+        return {setValue, getValue, reset};
     };
-    return {setMarker, getMarker, reset};
+
+    return {
+        render,
+    }
 })();
 
 const Game = (() => {
@@ -38,10 +42,7 @@ const Game = (() => {
         ]
         currentPlayerIndex = 0;
         gameOver = false;
-        Gameboard();
-        setMarker();
-        getMarker();
-        reset();
+        Gameboard.render();
     };
     return {
         start,
