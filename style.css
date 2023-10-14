@@ -18,7 +18,7 @@
     flex-direction: row;
     gap: 50px;
 }
-.box {
+.gameboard {
     flex-grow: 1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -26,34 +26,34 @@
     height: 500px;
     max-width: 800px; 
 }
-.box > div {
+.gameboard > div {
     border: 1px solid black;
 }
-.box > div#box1 {
+.gameboard > div#box1 {
     border-top-color: transparent;
     border-left-color: transparent;
 }
-.box > div#box2 {
+.gameboard > div#box2 {
     border-top-color: transparent;
 }
-.box > div#box3 {
+.gameboard > div#box3 {
     border-top-color: transparent;
     border-right-color: transparent;
 }
-.box > div#box4 {
+.gameboard > div#box4 {
     border-left-color: transparent;
 }
-.box > div#box6 {
+.gameboard > div#box6 {
     border-right-color: transparent;
 }
-.box > div#box7 {
+.gameboard > div#box7 {
     border-left-color: transparent;
     border-bottom-color: transparent;
 }
-.box > div#box8 {
+.gameboard > div#box8 {
     border-bottom-color: transparent;
 }
-.box > div#box9 {
+.gameboard > div#box9 {
     border-bottom-color: transparent;
     border-right-color: transparent;
 }
