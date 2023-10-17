@@ -1,10 +1,5 @@
-//Attach event listener to to each game box
-//Start the game
-//Check the gamemode
-//Set win conditions
-//Determine current player
-//After each move check win conditions and set other player as active
-
+//Event Listener attacthed to drop down difficulty menu
+//that implements start of game
 const mode = document.querySelectorAll('#diff');
 mode.forEach((mode) => {
     mode.addEventListener('click', () => {
@@ -12,6 +7,7 @@ mode.forEach((mode) => {
     });
 });
 
+//Controls the render of the gameboard
 const Gameboard = (() => {
 
     const render = () => {
@@ -21,13 +17,18 @@ const Gameboard = (() => {
                 
         });
     }
-    
+    const update = (index, value) => {
+        gameBox[index] = value;
+    }
     
     return {
         render,
+        update
     }
 })();
 
+//Logic for game and calls the gameboard function as well as
+//applies an index for the gameboard boxes
 const Game = (() => {
     let players = [];
     let currentPlayerIndex;
@@ -44,7 +45,7 @@ const Game = (() => {
     }
     const handleClick = (event) => {
         let index = parseInt(event.target.id.split("x")[1]);
-        console.log(index);
+        Game.update(index, players[currentPlayerIndex].mark);
     }
 
     return {
@@ -54,6 +55,7 @@ const Game = (() => {
 
 })();
 
+//Player creation
 const createPlayer = (name, mark) => {
     return {
         name,
@@ -63,15 +65,3 @@ const createPlayer = (name, mark) => {
 
 
 
-
-
-
-
-
-
-//const gameBox = document.querySelectorAll('.box');
-        //gameBox.forEach((gameBox) => {
-            //gameBox.addEventListener('click', () => {
-                //console.log('yurrr');
-            //});
-        //});
