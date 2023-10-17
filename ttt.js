@@ -1,30 +1,28 @@
-const startGame = document.querySelectorAll('#diff');
-startGame.forEach((startGame) => {
-    startGame.addEventListener('click', () => {
+//Attach event listener to to each game box
+//Start the game
+//Check the gamemode
+//Set win conditions
+//Determine current player
+//After each move check win conditions and set other player as active
+
+const mode = document.querySelectorAll('#diff');
+mode.forEach((mode) => {
+    mode.addEventListener('click', () => {
         Game.start();
     });
 });
 
 const Gameboard = (() => {
-    let gameboard = ["", "", "", "", "", "", "", "", ""]
 
     const render = () => {
-        const setValue = (index, marker) => {
-            if (index > gameboard.length) return;
-            gameboard[index] = marker;
-        }
-        const getValue = (index) => {
-            if (index > gameboard.length) return;
-            return gameboard[index];
-        }
-        const reset = () => {
-            for (let i = 0; i < gameboard.length; i++) {
-                gameboard[i] = "";
-            }
-        }
-        return {setValue, getValue, reset};
-    };
-
+        const gameBox = document.querySelectorAll('.box');
+        gameBox.forEach((gameBox) => {
+            gameBox.addEventListener('click', Game.handleClick);
+                
+        });
+    }
+    
+    
     return {
         render,
     }
@@ -37,16 +35,23 @@ const Game = (() => {
 
     const start = () => {
         players = [
-            createPlayer(document.querySelector("#player1").innerHTML,"X"),
-            createPlayer(document.querySelector("#player2").innerHTML, "O")
-        ]
-        currentPlayerIndex = 0;
-        gameOver = false;
-        Gameboard.render();
-    };
+            createPlayer(document.querySelector('#player1'), "X"),
+            createPlayer(document.querySelector('#player2'), "O")
+            ]
+            currentPlayerIndex = 0;
+            gameOver = false;
+            Gameboard.render();
+    }
+    const handleClick = (event) => {
+        let index = parseInt(event.target.id.split("x")[1]);
+        console.log(index);
+    }
+
     return {
         start,
+        handleClick
     }
+
 })();
 
 const createPlayer = (name, mark) => {
@@ -61,3 +66,12 @@ const createPlayer = (name, mark) => {
 
 
 
+
+
+
+//const gameBox = document.querySelectorAll('.box');
+        //gameBox.forEach((gameBox) => {
+            //gameBox.addEventListener('click', () => {
+                //console.log('yurrr');
+            //});
+        //});
