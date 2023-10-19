@@ -1,7 +1,29 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+}
+.image {
+    background-image: url(neon-grid.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+
 h1 {
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
+    align-items: center;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 150px;
+    font-size: 40px;
+    padding: 15px;
+
+    
 }
 
 #gameboard {
@@ -9,19 +31,21 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 400px;
+    height: 450px;
     justify-content: center;
+    color: white;
+    
 }
 
 .square {
-    font-family: 'Press Start 2P', cursive;
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid black;
+    border: 2px solid rgb(255, 255, 255);
+    box-shadow: 0px 9px 30px rgba(251, 5, 255, 0.3);
     justify-content: center;
     align-items: center;
     width: 25%;
-    height: 30%;
+    height: 35%;
     text-align: center;
     font-size: 80px;
 }
@@ -29,4 +53,20 @@ h1 {
 #controls, #message {
     text-align: center;
     margin: 40px 0;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+input {
+    margin-top: 15px;
+    font-family: 'Press Start 2P', cursive;
+    width: 200px;
+    padding: 10px;
+    font-size: 15px;
+}
+button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 10px;
 }
