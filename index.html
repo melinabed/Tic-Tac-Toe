@@ -6,50 +6,22 @@
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="style.css">
     <script src="ttt.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="page">
-        <div class="header">
-            <h1>Tic Tac Toe</h1>
-        </div>
-        
-        <div class="select">
-            <label for="diff">Choose a difficulty or play against a friend!</label>
-            <select name="diff" id="diff">
-            <option value="easy" id="mode">Easy</option>
-            <option value="medium" id="mode">Medium</option>
-            <option value="impossible" id="mode">Impossible</option>
-            <option value="friend" id="mode">Play Against Friend</option>
-            </select>
-        </div>
-        
-    
-        <div class="container">
-            <div class="cont-left">
-                <p id="player1"></p>
-            </div>
-            <div class="gameboard">
-                <div id="box1" class="box"></div>
-                <div id="box2" class="box"></div>
-                <div id="box3" class="box"></div>
-                <div id="box4" class="box"></div>
-                <div id="box5" class="box"></div>
-                <div id="box6" class="box"></div>
-                <div id="box7" class="box"></div>
-                <div id="box8" class="box"></div>
-                <div id="box9" class="box"></div>
-            </div>
-            <div class="cont-right">
-                <p id="player2"></p>
-            </div>
-        </div>
-
-        <div class="footer">
-            <button id="restart-btn">Restart</button>
-            <div id="message"></div>
-        </div>
+    <h1>Tic Tac Toe</h1>
+    <div id="gameboard"></div>
+    <div id="controls">
+        <input type="text" id="player1" placeholder="Player 1 Name">
+        <input type="text" id="player2" placeholder="Player 2 Name">
+        <button id="start-button">Start Game</button>
+        <button id="restart-button">Restart Game</button>
     </div>
+    <div id="message"></div>
+    <div id="display-result"></div>
     
 
     

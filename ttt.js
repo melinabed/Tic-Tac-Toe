@@ -1,34 +1,53 @@
-//Event Listener attacthed to drop down difficulty menu
-//that implements start of game
-const mode = document.querySelectorAll('#diff');
-mode.forEach((mode) => {
-    mode.addEventListener('click', () => {
-        Game.start();
-    });
-});
-
-//Controls the render of the gameboard
-const Gameboard = (() => {
-
-    const render = () => {
-        const gameBox = document.querySelectorAll('.box');
-        gameBox.forEach((gameBox) => {
-            gameBox.addEventListener('click', Game.handleClick);
-                
-        });
+//Displays a message if the game is won or ended in a tie
+const displayController = (() => {
+    const renderMessage = (message) => {
+        document.querySelector('#message').innerHTML = message;
     }
-    const update = (index, value) => {
-        gameBox[index] = value;
-    }
-    
     return {
-        render,
-        update
+        renderMessage,
     }
 })();
 
-//Logic for game and calls the gameboard function as well as
-//applies an index for the gameboard boxes
+//Creates a gameboard as an array and renders it when
+//the start button is clicked
+const Gameboard = (() => {
+    let gameboard = ["", "", "", "", "", "", "", "", ""]
+
+    const render = () => {
+        let boardHTML = "";
+        gameboard.forEach((square, index) => {
+            boardHTML += `<div class="square" id=square-${index}>${square}</div>`
+        })
+        document.querySelector('#gameboard').innerHTML = boardHTML;
+        const squares = document.querySelectorAll('.square');
+        squares.forEach((square) => {
+            square.addEventListener('click', Game.handleClick);
+        })
+    };
+    const update = (index, value) => {
+        gameboard[index] = value;
+        render();
+    };
+    
+    const getGameboard = () => gameboard;
+    
+    return {
+        render,
+        update,
+        getGameboard
+    }
+
+})();
+
+//Factory for the players and markers
+const createPlayer = (name, mark) => {
+    return {
+        name,
+        mark
+    }
+}
+
+//Logic for the game
 const Game = (() => {
     let players = [];
     let currentPlayerIndex;
@@ -36,32 +55,90 @@ const Game = (() => {
 
     const start = () => {
         players = [
-            createPlayer(document.querySelector('#player1'), "X"),
-            createPlayer(document.querySelector('#player2'), "O")
-            ]
-            currentPlayerIndex = 0;
-            gameOver = false;
-            Gameboard.render();
+            createPlayer(document.querySelector('#player1').value, "X"),
+            createPlayer(document.querySelector('#player2').value, "O")
+        ]
+        currentPlayerIndex = 0;
+        gameOver = false;
+        Gameboard.render();
+        const squares = document.querySelectorAll('.square');
+        squares.forEach((square) => {
+            square.addEventListener('click', handleClick);
+        })
     }
     const handleClick = (event) => {
-        let index = parseInt(event.target.id.split("x")[1]);
-        Game.update(index, players[currentPlayerIndex].mark);
+        if (gameOver) {
+            return;
+        }
+
+        let index = parseInt(event.target.id.split('-')[1]);
+
+        if (Gameboard.getGameboard()[index] !== "")
+            return;
+
+            Gameboard.update(index, players[currentPlayerIndex].mark);
+
+            if (checkWinner(Gameboard.getGameboard(), players[currentPlayerIndex].mark)) {
+                gameOver = true;
+                displayController.renderMessage(`${players[currentPlayerIndex].name} wins. 3 in a row!`)
+            } else if (checkTie(Gameboard.getGameboard())) {
+                gameOver = true;
+                displayController.renderMessage("It's a tie!")
+            }   
+
+            currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+    }
+    const restart = () => {
+        for (let i = 0; i < 9; i++) {
+            Gameboard.update(i, "");
+        }
+        Gameboard.render();
+        gameOver = false;
+        document.querySelector('#message').innerHTML = "";
     }
 
     return {
         start,
-        handleClick
+        handleClick,
+        restart
     }
-
 })();
 
-//Player creation
-const createPlayer = (name, mark) => {
-    return {
-        name,
-        mark
+//Logic to determin win conditions with the win combinations
+function checkWinner(board) {
+    const winCombos = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ]
+    for (let i = 0; i < winCombos.length; i++) {
+        const [a, b, c] = winCombos[i];
+        if (board[a] && board[a] === board[b] && board[a] === board[c]){
+            return true;
+        }
     }
+    return false;
 }
+
+function checkTie(board) {
+    return board.every(cell => cell !== "")
+}
+
+const startButton = document.querySelector('#start-button');
+startButton.addEventListener('click', () => {
+    Game.start();
+})
+
+const restartButton = document.querySelector('#restart-button');
+restartButton.addEventListener('click', () => {
+    Game.restart();
+})
+
 
 
 
