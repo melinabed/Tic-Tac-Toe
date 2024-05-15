@@ -104,7 +104,7 @@ const Game = (() => {
     }
 })();
 
-//Logic to determin win conditions with the win combinations
+//Logic to determine win conditions with the win combinations
 function checkWinner(board) {
     const winCombos = [
         [0, 1, 2],
